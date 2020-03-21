@@ -1,4 +1,35 @@
+server:
+  port: 8002
+  context-path: /
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  type-aliases-package: com.jsy.entity
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
+
 spring:
-  profiles: dev
-  application:
-    name: dev-name
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
+    url: jdbc:mysql://118.89.198.183:3309/micro-test?serverTimezone=UTC&characterEncoding=utf-8
+    username: bigbangbang
+    password: bigbangbang@!
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001:7001/eureka,http://eureka7003:7003/eureka,http://eureka7004:7004/eureka
+  instance:
+    instance-id: theory-provider
+    prefer-ip-address: true
+
+info:
+  app-name: provider-from-configserver
+  company-name: jsy
+  项目: ${project.artifactId}
+  版本: ${project.version}
